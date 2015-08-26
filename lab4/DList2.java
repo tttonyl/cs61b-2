@@ -103,6 +103,14 @@ public class DList2 {
    */
   public void removeFront() {
     // Your solution here.
+    if (size > 0) {
+      DListNode2 currentFirstNode = head.next;
+
+      // set sentinal next to skip over the previous first node
+      currentFirstNode.next.prev = head;
+      head.next = currentFirstNode.next;
+      size--;
+    }
   }
 
   /**
