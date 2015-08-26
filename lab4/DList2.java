@@ -34,6 +34,7 @@ public class DList2 {
   public DList2() {
     head = new DListNode2();
     head.item = Integer.MIN_VALUE;
+
     head.next = head;
     head.prev = head;
     size = 0;
@@ -45,9 +46,12 @@ public class DList2 {
   public DList2(int a) {
     head = new DListNode2();
     head.item = Integer.MIN_VALUE;
+
     head.next = new DListNode2();
     head.next.item = a;
+
     head.prev = head.next;
+
     head.next.prev = head;
     head.prev.next = head;
     size = 1;
@@ -59,10 +63,13 @@ public class DList2 {
   public DList2(int a, int b) {
     head = new DListNode2();
     head.item = Integer.MIN_VALUE;
+
     head.next = new DListNode2();
     head.next.item = a;
+
     head.prev = new DListNode2();
     head.prev.item = b;
+
     head.next.prev = head;
     head.next.next = head.prev;
     head.prev.next = head;
@@ -75,6 +82,19 @@ public class DList2 {
    */
   public void insertFront(int i) {
     // Your solution here.
+
+    // Create the new node
+    DListNode2 newNode = new DListNode2(i);
+
+    // new node next is the previous first node
+    newNode.next = head.next;
+    newNode.next.prev = newNode;
+
+    // sentinal next is the new node
+    head.next = newNode;
+    newNode.prev = head;
+
+    size++;
   }
 
   /**
