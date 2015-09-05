@@ -1,0 +1,51 @@
+Let Y be a subclass of X, and let y and x be variables of classes Y and X
+respectively.  From lecture, you know that the assignment "x = y" is valid, but
+the assignment "y = (Y) x" requires a cast to compile, and will cause a
+run-time error if x references an object that isn't a Y.
+
+What about arrays of objects?  Suppose xa is an array of X's, and ya is an
+array of Y's.
+
+(a)  At compile-time, can we assign xa to ya, and vice versa?  When is a cast
+     required?
+
+     Using an array declaration of
+     ```java
+     X[] xa = new X[10];
+     Y[] ya = new Y[10];
+     ```
+
+     xa = ya is valid.
+     ya = xa is invalid. To make ya = xa work, we would need to cast ya to an
+     array of X // (X[])ya
+
+
+
+(b)  At run-time, if ya references an array of Y's, can we assign it to xa?
+     Can we then assign it back from xa to ya?
+
+     ```java
+     X[] xa = new X[10];
+     Y[] ya = new Y[10];
+
+     xa = ya; 
+     ya = xa; // error
+     ```
+
+     We can assign ya to xa. This makes xa have a static class of X[] but it's
+     dynamic class is Y[] (which is ok since Y is always X). 
+
+     The assignment back from xa to ya causes an incompatible type error since
+     we are assigning static type X[] to Y[] which fails because X is not Y.
+
+(c)  If xa references an array of X's (that are not Y's), can we assign it to
+     ya?  Can we then assign it back from ya to xa?  Does it make a difference
+     if the array of type X[] references objects that are all of class Y?  Why
+     do you think this is the case?
+     
+
+     We cannot assign xa to ya since the class X is the superclass of Y. It does
+     not make a difference if the array of type X[] references objects that are
+     all of class Y. This is because of the static type of the xa and ya.
+     Specifically that all Y objects are X objects because Y extends X, but
+     this doesn't work the other way around.
